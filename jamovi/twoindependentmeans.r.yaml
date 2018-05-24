@@ -1,0 +1,37 @@
+---
+name:  twoIndependentMeans
+title: Difference between two independent means
+jrs:   '1.1'
+
+items:
+    - name:  meantable
+      title: Table of descriptives
+      type: Table
+      rows:  5
+      columns:
+        - name: Group
+          type: text
+        - name: M
+          type: number
+        - name: CI_low
+          type: number
+        - name: CI_high
+          type: number
+        - name: s
+          type: number
+        - name: N
+          title: N
+          type: integer
+
+    - name:  text
+      type:  Preformatted
+          
+    - name: plot
+      title: Difference Plot
+      type: Image
+      width:  400
+      height: 300
+      renderFun: .plot
+  
+
+...

@@ -18,6 +18,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#jamovi files
+temp/
+build/
+
 # =========================
 # Operating System Files
 # =========================

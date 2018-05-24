@@ -1,0 +1,26 @@
+---
+title: 'New Statistics (Effect Sizes, Estimation, and Meta-Analysis)'
+name: EstimationStats
+version: 0.0.0
+jms: '1.0'
+authors:
+  - Bob Calin-Jageman
+maintainer: Bob Calin-Jageman <rcalinjageman@dom.edu>
+date: '2018-05-23'
+type: R
+description: >-
+  User-friendly functions for estimation Not much new here; just making things
+  nice for Jamovi
+analyses:
+  - title: Difference between two proportions
+    name: twoproportions
+    ns: EstimationStats
+    menuGroup: EstimationStats
+    menuTitle: Difference between two proportions
+  - title: Difference between two independent means
+    name: twoIndependentMeans
+    ns: EstimationStats
+    menuGroup: EstimationStats
+    menuTitle: Difference between two independent means
+
+...

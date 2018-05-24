@@ -1,0 +1,36 @@
+---
+name:  twoproportions
+title: Difference between two proportions
+menuGroup: EstimationStats
+version: '1.0.0'
+jas: '1.1'
+
+options:
+    - name: data
+      type: Data
+
+    - name: dep
+      title: Dependent Variable
+      type: Variable
+      rejectInf: true
+
+    - name: group
+      title: Grouping Variable
+      type: Variable
+      rejectInf: true
+      
+    - name: eventcode
+      title: Is an event the first level or second level of the dependent variable
+      type: Integer
+      default: 1
+      min: 1
+      max: 2
+      
+    - name: ciWidth
+      type: Number
+      title: Confidence level
+      min: 50
+      max: 99.9
+      default: 95  
+
+...

@@ -1,0 +1,12 @@
+Package: EstimationStats
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.0.0
+Author: Bob Calin-Jageman
+Maintainer: Bob Calin-Jageman <rcalinjageman@dom.edu>
+Description: User-friendly estimation
+    Not much new here, just providing friendly interfaces
+License: GPL
+Encoding: UTF-8
+LazyData: true
+Imports: jmvcore (>= 0.5.5), R6, multicon, psych

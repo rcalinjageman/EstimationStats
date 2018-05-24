@@ -1,0 +1,38 @@
+---
+name:  twoIndependentMeans
+title: Difference between two independent means
+menuGroup: EstimationStats
+version: '1.0.0'
+jas: '1.1'
+
+options:
+    - name: data
+      type: Data
+
+    - name: dep
+      title: Dependent Variable
+      type: Variable
+
+    - name: group
+      title: Grouping Variable
+      type: Variable
+
+    - name: ciWidth
+      type: Number
+      title: Confidence level
+      min: 50
+      max: 99.9
+      default: 95  
+
+    - name: varEq
+      title: Assume equal variances
+      type: Bool
+      default: true
+
+    - name: nhst
+      title: Report decision-making stats
+      type: Bool
+      default: false
+
+      
+...

@@ -1,0 +1,35 @@
+---
+name:  twoproportions
+title: Difference between two proportions
+jrs:   '1.1'
+
+items:
+    - name:  propd
+      title: Table of results
+      type: Table
+      rows:  3
+      columns:
+        - name: Group
+          type: text
+        - name: r_n
+          title: r / N
+          type: text
+        - name: P
+          type: number
+        - name: CI_low
+          type: number
+        - name: CI_high
+          type: number
+          format: zto
+
+    - name:  text
+      type:  Preformatted
+          
+    - name: plot
+      title: Difference Plot
+      type: Image
+      width:  400
+      height: 300
+      renderFun: .plot
+
+...
