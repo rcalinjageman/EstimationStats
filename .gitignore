@@ -25,3 +25,4 @@ build/
 # =========================
 # Operating System Files
 # =========================
+.Rhistory
