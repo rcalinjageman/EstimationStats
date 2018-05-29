@@ -203,9 +203,9 @@ twoIndependentMeansResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                     list(
                         `name`="N[4]", 
                         `title`="N", 
-            self$add(jmvcore::Preformatted$new(
                         `type`="integer", 
                         `content`=""))))
+            self$add(jmvcore::Html$new(
                 options=options,
                 name="text"))
             self$add(jmvcore::Image$new(
@@ -248,7 +248,7 @@ twoIndependentMeansBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$meantable} \tab \tab \tab \tab \tab a table \cr
-#'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
+#'   \code{results$text} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
 #' }
 #'
