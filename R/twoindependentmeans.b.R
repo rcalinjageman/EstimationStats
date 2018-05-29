@@ -7,6 +7,9 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = twoIndependentMeansBase,
     private = list(
         .run = function() {
+          
+          if (is.null(self$options$dep) || is.null(self$options$group))
+            return()
 
             # `self$data` contains the data
             # `self$options` contains the options
