@@ -15,6 +15,8 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # `self$options` contains the options
             # `self$results` contains the results object (to populate)
 
+          if (nlevels(self$data[[self$options$group]]) != 2)
+            stop('Grouping variable must have two levels')
 
           level1 = levels(self$data[[self$options$group]])[2]
           level2 = levels(self$data[[self$options$group]])[1]
