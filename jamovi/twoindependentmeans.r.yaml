@@ -1,11 +1,11 @@
 ---
 name:  twoIndependentMeans
-title: Difference between two independent means
+title: Difference Between Two Independent Means
 jrs:   '1.1'
 
 items:
     - name:  meantable
-      title: Table of descriptives
+      title: Descriptives
       type: Table
       rows:  5
       columns:

@@ -1,6 +1,6 @@
 ---
 name:  twoIndependentMeans
-title: Difference between two independent means
+title: Difference Between Two Independent Means
 menuGroup: EstimationStats
 version: '1.0.0'
 jas: '1.1'

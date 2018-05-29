@@ -71,12 +71,12 @@ twoIndependentMeansResults <- if (requireNamespace('jmvcore')) R6::R6Class(
             super$initialize(
                 options=options,
                 name="",
-                title="Difference between two independent means")
+                title="Difference Between Two Independent Means")
             self$add(jmvcore::Table$new(
                 options=options,
                 name="meantable",
-                title="Table of descriptives",
                 rows=5,
+                title="Descriptives",
                 columns=list(
                     list(
                         `name`="Group", 
@@ -127,7 +127,7 @@ twoIndependentMeansBase <- if (requireNamespace('jmvcore')) R6::R6Class(
                 completeWhenFilled = FALSE)
         }))
 
-#' Difference between two independent means
+#' Difference Between Two Independent Means
 #'
 #' 
 #' @param data .

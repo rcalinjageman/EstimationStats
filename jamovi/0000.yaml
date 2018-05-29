@@ -17,10 +17,10 @@ analyses:
     ns: EstimationStats
     menuGroup: EstimationStats
     menuTitle: Difference between two proportions
-  - title: Difference between two independent means
+  - title: Difference Between Two Independent Means
     name: twoIndependentMeans
     ns: EstimationStats
     menuGroup: EstimationStats
-    menuTitle: Difference between two independent means
+    menuTitle: Difference Between Two Independent Means
 
 ...
