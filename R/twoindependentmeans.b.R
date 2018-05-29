@@ -6,6 +6,22 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
     "twoIndependentMeansClass",
     inherit = twoIndependentMeansBase,
     private = list(
+        .init = function() {
+          
+          ci = paste0(self$options$ciWidth, '% Confidence Interval')
+          main = self$results$meantable
+          
+          main$getColumn('CI_low[1]')$setSuperTitle(ci)
+          main$getColumn('CI_high[1]')$setSuperTitle(ci)
+          main$getColumn('CI_low[2]')$setSuperTitle(ci)
+          main$getColumn('CI_high[2]')$setSuperTitle(ci)
+          main$getColumn('CI_low[3]')$setSuperTitle(ci)
+          main$getColumn('CI_high[3]')$setSuperTitle(ci)
+          main$getColumn('CI_low[4]')$setSuperTitle(ci)
+          main$getColumn('CI_high[4]')$setSuperTitle(ci)
+          
+          main$addFormat(rowNo=1, col='name[4]', jmvcore::Cell.BEGIN_END_GROUP)
+        },
         .run = function() {
           
           if (is.null(self$options$dep) || is.null(self$options$group))
@@ -29,50 +45,43 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             return()
           }
           
-          notetext = paste("Confidence level = ", self$options$ciWidth, "%")
+          notetext = ''
           if(self$options$nhst) {
             notetext = paste(notetext, "\n", results$nhst_res)
           }
           notetext = paste(notetext, "\n", replication_sample(results))
-          notetext = paste(notetext, "\n", "This module is still in beta; note Cohen's d and its CI are not adjusted for upward bias")
           self$results$text$setContent(notetext)
           
                     
           table = self$results$meantable
           table$setRow(rowNo=1, values = list(
-            Group = results$level1,
-            M = results$m1,
-            CI_low = results$m1_low,
-            CI_high = results$m1_high,
-            s = results$s1,
-            N = results$n1
+            `name[1]` = results$level1,
+            `mean[1]` = results$m1,
+            `CI_low[1]` = results$m1_low,
+            `CI_high[1]` = results$m1_high,
+            `s[1]` = results$s1,
+            `N[1]` = results$n1
             )
           )
-          table$setRow(rowNo=2, values = list(
-            Group = results$level2,
-            M = results$m2,
-            CI_low = results$m2_low,
-            CI_high = results$m2_high,
-            s = results$s2,
-            N = results$n2
+          table$setRow(rowNo=1, values = list(
+            `name[2]` = results$level2,
+            `mean[2]` = results$m2,
+            `CI_low[2]` = results$m2_low,
+            `CI_high[2]` = results$m2_high,
+            `s[2]` = results$s2,
+            `N[2]` = results$n2
           )
           )
-          table$setRow(rowNo=3, values = list(
-            Group = "Difference",
-            M = results$mdiff,
-            CI_low = results$mdiff_low,
-            CI_high = results$mdiff_high,
-            s = NULL,
-            N = NULL
+          table$setRow(rowNo=1, values = list(
+            `mean[3]` = results$mdiff,
+            `CI_low[3]` = results$mdiff_low,
+            `CI_high[3]` = results$mdiff_high
           )
           )
-          table$setRow(rowNo=5, values = list(
-            Group = "Standardized Difference (Cohen's d)",
-            N = NULL,
-            M = results$d,
-            CI_low = results$d_low,
-            CI_high = results$d_high,
-            s = NULL
+          table$setRow(rowNo=1, values = list(
+            `mean[4]` = results$d,
+            `CI_low[4]` = results$d_low,
+            `CI_high[4]` = results$d_high
           )
           )
           
