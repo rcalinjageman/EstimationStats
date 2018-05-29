@@ -20,10 +20,22 @@ twoIndependentMeansOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             private$..dep <- jmvcore::OptionVariable$new(
                 "dep",
-                dep)
+                dep,
+                suggested=list(
+                    "continuous"),
+                permitted=list(
+                    "continuous",
+                    "nominal",
+                    "ordinal"))
             private$..group <- jmvcore::OptionVariable$new(
                 "group",
-                group)
+                group,
+                suggested=list(
+                    "nominal"),
+                permitted=list(
+                    "nominal",
+                    "ordinal",
+                    "nominaltext"))
             private$..ciWidth <- jmvcore::OptionNumber$new(
                 "ciWidth",
                 ciWidth,
