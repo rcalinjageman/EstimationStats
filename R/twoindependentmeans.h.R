@@ -116,9 +116,10 @@ twoIndependentMeansResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 options=options,
                 name="plot",
                 title="Difference Plot",
-                width=400,
-                height=300,
-                renderFun=".plot"))}))
+                width=600,
+                height=400,
+                renderFun=".plot",
+                requiresData=TRUE))}))
 
 twoIndependentMeansBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "twoIndependentMeansBase",

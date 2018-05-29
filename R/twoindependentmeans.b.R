@@ -17,16 +17,6 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
           level2 = levels(self$data[[self$options$group]])[1]
           gnames = c(level2,level1)
           
-           
-          plotdata = list(group = self$data[[self$options$group]], 
-                          dep = self$data[[self$options$dep]], 
-                          conf=self$options$ciWidth/100,
-                          grp.names=gnames,
-                          ylab = self$options$dep,
-                          ylabs = as.character(self$options$dep)
-                          )
-
-          
           results <- estimate.two.means(pdata = self$data, dep = self$options$dep, group = self$options$group, conf = self$options$ciWidth/100, varEq = self$options$varEq, nhst = self$options$nhst)
           
           if(results$error) {
@@ -81,16 +71,22 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
           )
           )
           
-          image <- self$results$plot
-          image$setState(plotdata)
-          
-          
           
         },
         .plot = function(image, ...) {
-          results = image$state
-          plot = multicon::diffPlot(results$group, results$dep, paired=FALSE, conf=results$conf, grp.names = results$grp.names, ylab=results$ylabs)
-          print(plot)
+          
+          if (is.null(self$options$dep) || is.null(self$options$group))
+            return(FALSE)
+            
+          data  = self$data
+          group = data[[self$options$group]]
+          dep   = data[[self$options$dep]]
+          groupNames = rev(levels(group))
+          conf = self$options$ciWidth / 100
+          fmla = as.formula(jmvcore::constructFormula(self$options$dep, self$options$group))
+            
+          multicon::diffPlot(fmla, data, paired=FALSE, conf=conf, grp.names=groupNames, ylab=self$options$dep, xlab='')
+          
           TRUE
         })
 )
