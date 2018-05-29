@@ -1,7 +1,4 @@
 
-# This file is a generated template, your changes will not be overwritten
-
-
 twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
     "twoIndependentMeansClass",
     inherit = twoIndependentMeansBase,
@@ -26,10 +23,6 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
           
           if (is.null(self$options$dep) || is.null(self$options$group))
             return()
-
-            # `self$data` contains the data
-            # `self$options` contains the options
-            # `self$results` contains the results object (to populate)
 
           if (nlevels(self$data[[self$options$group]]) != 2)
             stop('Grouping variable must have two levels')
