@@ -20,10 +20,22 @@ twoIndependentMeansOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             private$..dep <- jmvcore::OptionVariable$new(
                 "dep",
-                dep)
+                dep,
+                suggested=list(
+                    "continuous"),
+                permitted=list(
+                    "continuous",
+                    "nominal",
+                    "ordinal"))
             private$..group <- jmvcore::OptionVariable$new(
                 "group",
-                group)
+                group,
+                suggested=list(
+                    "nominal"),
+                permitted=list(
+                    "nominal",
+                    "ordinal",
+                    "nominaltext"))
             private$..ciWidth <- jmvcore::OptionNumber$new(
                 "ciWidth",
                 ciWidth,
@@ -71,42 +83,139 @@ twoIndependentMeansResults <- if (requireNamespace('jmvcore')) R6::R6Class(
             super$initialize(
                 options=options,
                 name="",
-                title="Difference between two independent means")
+                title="Difference Between Two Independent Means")
             self$add(jmvcore::Table$new(
                 options=options,
                 name="meantable",
-                title="Table of descriptives",
-                rows=5,
+                title="Descriptives",
+                rows=1,
+                notes=list(
+                    `ciNotAdjusted`="Cohen's d and it's confidence interval are not adjusted for upward bias"),
                 columns=list(
                     list(
-                        `name`="Group", 
-                        `type`="text"),
+                        `name`="name[1]", 
+                        `type`="text", 
+                        `title`=""),
                     list(
-                        `name`="M", 
+                        `name`="mean[1]", 
+                        `type`="number", 
+                        `title`="M"),
+                    list(
+                        `name`="CI_low[1]", 
+                        `type`="number", 
+                        `title`="Lower", 
+                        `superTitle`="Confidence Interval"),
+                    list(
+                        `name`="CI_high[1]", 
+                        `type`="number", 
+                        `title`="Upper", 
+                        `superTitle`="Confidence Interval"),
+                    list(
+                        `name`="s[1]", 
+                        `title`="s", 
                         `type`="number"),
                     list(
-                        `name`="CI_low", 
-                        `type`="number"),
-                    list(
-                        `name`="CI_high", 
-                        `type`="number"),
-                    list(
-                        `name`="s", 
-                        `type`="number"),
-                    list(
-                        `name`="N", 
+                        `name`="N[1]", 
                         `title`="N", 
-                        `type`="integer"))))
-            self$add(jmvcore::Preformatted$new(
+                        `type`="integer"),
+                    list(
+                        `name`="name[2]", 
+                        `type`="text", 
+                        `title`=""),
+                    list(
+                        `name`="mean[2]", 
+                        `type`="number", 
+                        `title`="M"),
+                    list(
+                        `name`="CI_low[2]", 
+                        `type`="number", 
+                        `title`="Lower", 
+                        `superTitle`="Confidence Interval"),
+                    list(
+                        `name`="CI_high[2]", 
+                        `type`="number", 
+                        `title`="Upper", 
+                        `superTitle`="Confidence Interval"),
+                    list(
+                        `name`="s[2]", 
+                        `title`="s", 
+                        `type`="number"),
+                    list(
+                        `name`="N[2]", 
+                        `title`="N", 
+                        `type`="integer"),
+                    list(
+                        `name`="name[3]", 
+                        `type`="text", 
+                        `title`="", 
+                        `content`="Difference"),
+                    list(
+                        `name`="mean[3]", 
+                        `type`="number", 
+                        `title`="M"),
+                    list(
+                        `name`="CI_low[3]", 
+                        `type`="number", 
+                        `title`="Lower", 
+                        `superTitle`="Confidence Interval"),
+                    list(
+                        `name`="CI_high[3]", 
+                        `type`="number", 
+                        `title`="Upper", 
+                        `superTitle`="Confidence Interval"),
+                    list(
+                        `name`="s[3]", 
+                        `title`="s", 
+                        `type`="number", 
+                        `content`=""),
+                    list(
+                        `name`="N[3]", 
+                        `title`="N", 
+                        `type`="integer", 
+                        `content`=""),
+                    list(
+                        `name`="name[4]", 
+                        `type`="text", 
+                        `title`="", 
+                        `content`="Standardized Difference (Cohen's d)"),
+                    list(
+                        `name`="mean[4]", 
+                        `type`="number", 
+                        `title`="M", 
+                        `format`="zto"),
+                    list(
+                        `name`="CI_low[4]", 
+                        `type`="number", 
+                        `title`="Lower", 
+                        `superTitle`="Confidence Interval", 
+                        `format`="zto"),
+                    list(
+                        `name`="CI_high[4]", 
+                        `type`="number", 
+                        `title`="Upper", 
+                        `superTitle`="Confidence Interval", 
+                        `format`="zto"),
+                    list(
+                        `name`="s[4]", 
+                        `title`="s", 
+                        `type`="number", 
+                        `content`=""),
+                    list(
+                        `name`="N[4]", 
+                        `title`="N", 
+                        `type`="integer", 
+                        `content`=""))))
+            self$add(jmvcore::Html$new(
                 options=options,
                 name="text"))
             self$add(jmvcore::Image$new(
                 options=options,
                 name="plot",
                 title="Difference Plot",
-                width=400,
-                height=300,
-                renderFun=".plot"))}))
+                width=600,
+                height=400,
+                renderFun=".plot",
+                requiresData=TRUE))}))
 
 twoIndependentMeansBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "twoIndependentMeansBase",
@@ -127,7 +236,7 @@ twoIndependentMeansBase <- if (requireNamespace('jmvcore')) R6::R6Class(
                 completeWhenFilled = FALSE)
         }))
 
-#' Difference between two independent means
+#' Difference Between Two Independent Means
 #'
 #' 
 #' @param data .
@@ -139,7 +248,7 @@ twoIndependentMeansBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$meantable} \tab \tab \tab \tab \tab a table \cr
-#'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
+#'   \code{results$text} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
 #' }
 #'

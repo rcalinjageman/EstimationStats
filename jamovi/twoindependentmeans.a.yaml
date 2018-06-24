@@ -1,6 +1,6 @@
 ---
 name:  twoIndependentMeans
-title: Difference between two independent means
+title: Difference Between Two Independent Means
 menuGroup: EstimationStats
 version: '1.0.0'
 jas: '1.1'
@@ -12,10 +12,22 @@ options:
     - name: dep
       title: Dependent Variable
       type: Variable
+      suggested:
+        - continuous
+      permitted:
+        - continuous
+        - nominal
+        - ordinal
 
     - name: group
       title: Grouping Variable
       type: Variable
+      suggested:
+        - nominal
+      permitted:
+        - nominal
+        - ordinal
+        - nominaltext
 
     - name: ciWidth
       type: Number

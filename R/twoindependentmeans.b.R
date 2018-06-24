@@ -1,31 +1,35 @@
 
-# This file is a generated template, your changes will not be overwritten
-
-
 twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
     "twoIndependentMeansClass",
     inherit = twoIndependentMeansBase,
     private = list(
+        .init = function() {
+          
+          ci = paste0(self$options$ciWidth, '% Confidence Interval')
+          main = self$results$meantable
+          
+          main$getColumn('CI_low[1]')$setSuperTitle(ci)
+          main$getColumn('CI_high[1]')$setSuperTitle(ci)
+          main$getColumn('CI_low[2]')$setSuperTitle(ci)
+          main$getColumn('CI_high[2]')$setSuperTitle(ci)
+          main$getColumn('CI_low[3]')$setSuperTitle(ci)
+          main$getColumn('CI_high[3]')$setSuperTitle(ci)
+          main$getColumn('CI_low[4]')$setSuperTitle(ci)
+          main$getColumn('CI_high[4]')$setSuperTitle(ci)
+          
+          main$addFormat(rowNo=1, col='name[4]', jmvcore::Cell.BEGIN_END_GROUP)
+        },
         .run = function() {
+          
+          if (is.null(self$options$dep) || is.null(self$options$group))
+            return()
 
-            # `self$data` contains the data
-            # `self$options` contains the options
-            # `self$results` contains the results object (to populate)
-
+          if (nlevels(self$data[[self$options$group]]) != 2)
+            stop('Grouping variable must have two levels')
 
           level1 = levels(self$data[[self$options$group]])[2]
           level2 = levels(self$data[[self$options$group]])[1]
           gnames = c(level2,level1)
-          
-           
-          plotdata = list(group = self$data[[self$options$group]], 
-                          dep = self$data[[self$options$dep]], 
-                          conf=self$options$ciWidth/100,
-                          grp.names=gnames,
-                          ylab = self$options$dep,
-                          ylabs = as.character(self$options$dep)
-                          )
-
           
           results <- estimate.two.means(pdata = self$data, dep = self$options$dep, group = self$options$group, conf = self$options$ciWidth/100, varEq = self$options$varEq, nhst = self$options$nhst)
           
@@ -34,63 +38,62 @@ twoIndependentMeansClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             return()
           }
           
-          notetext = paste("Confidence level = ", self$options$ciWidth, "%")
+          notetext = ''
           if(self$options$nhst) {
             notetext = paste(notetext, "\n", results$nhst_res)
           }
           notetext = paste(notetext, "\n", replication_sample(results))
-          notetext = paste(notetext, "\n", "This module is still in beta; note Cohen's d and its CI are not adjusted for upward bias")
           self$results$text$setContent(notetext)
           
                     
           table = self$results$meantable
           table$setRow(rowNo=1, values = list(
-            Group = results$level1,
-            M = results$m1,
-            CI_low = results$m1_low,
-            CI_high = results$m1_high,
-            s = results$s1,
-            N = results$n1
+            `name[1]` = results$level1,
+            `mean[1]` = results$m1,
+            `CI_low[1]` = results$m1_low,
+            `CI_high[1]` = results$m1_high,
+            `s[1]` = results$s1,
+            `N[1]` = results$n1
             )
           )
-          table$setRow(rowNo=2, values = list(
-            Group = results$level2,
-            M = results$m2,
-            CI_low = results$m2_low,
-            CI_high = results$m2_high,
-            s = results$s2,
-            N = results$n2
+          table$setRow(rowNo=1, values = list(
+            `name[2]` = results$level2,
+            `mean[2]` = results$m2,
+            `CI_low[2]` = results$m2_low,
+            `CI_high[2]` = results$m2_high,
+            `s[2]` = results$s2,
+            `N[2]` = results$n2
           )
           )
-          table$setRow(rowNo=3, values = list(
-            Group = "Difference",
-            M = results$mdiff,
-            CI_low = results$mdiff_low,
-            CI_high = results$mdiff_high,
-            s = NULL,
-            N = NULL
+          table$setRow(rowNo=1, values = list(
+            `mean[3]` = results$mdiff,
+            `CI_low[3]` = results$mdiff_low,
+            `CI_high[3]` = results$mdiff_high
           )
           )
-          table$setRow(rowNo=5, values = list(
-            Group = "Standardized Difference (Cohen's d)",
-            N = NULL,
-            M = results$d,
-            CI_low = results$d_low,
-            CI_high = results$d_high,
-            s = NULL
+          table$setRow(rowNo=1, values = list(
+            `mean[4]` = results$d,
+            `CI_low[4]` = results$d_low,
+            `CI_high[4]` = results$d_high
           )
           )
-          
-          image <- self$results$plot
-          image$setState(plotdata)
-          
           
           
         },
         .plot = function(image, ...) {
-          results = image$state
-          plot = multicon::diffPlot(results$group, results$dep, paired=FALSE, conf=results$conf, grp.names = results$grp.names, ylab=results$ylabs)
-          print(plot)
+          
+          if (is.null(self$options$dep) || is.null(self$options$group))
+            return(FALSE)
+            
+          data  = self$data
+          group = data[[self$options$group]]
+          dep   = data[[self$options$dep]]
+          groupNames = rev(levels(group))
+          conf = self$options$ciWidth / 100
+          fmla = as.formula(jmvcore::constructFormula(self$options$dep, self$options$group))
+            
+          multicon::diffPlot(fmla, data, paired=FALSE, conf=conf, grp.names=groupNames, ylab=self$options$dep, xlab='')
+          
           TRUE
         })
 )

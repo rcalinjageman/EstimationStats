@@ -1,37 +1,116 @@
 ---
 name:  twoIndependentMeans
-title: Difference between two independent means
+title: Difference Between Two Independent Means
 jrs:   '1.1'
 
 items:
     - name:  meantable
-      title: Table of descriptives
+      title: Descriptives
       type: Table
-      rows:  5
+      rows:  1
+      notes:
+        ciNotAdjusted: Cohen's d and it's confidence interval are not adjusted for upward bias
       columns:
-        - name: Group
+        - name: name[1]
           type: text
-        - name: M
+          title: ''
+        - name: mean[1]
           type: number
-        - name: CI_low
+          title: 'M'
+        - name: CI_low[1]
           type: number
-        - name: CI_high
+          title: Lower
+          superTitle: Confidence Interval
+        - name: CI_high[1]
           type: number
-        - name: s
+          title: Upper
+          superTitle: Confidence Interval
+        - name: s[1]
+          title: s
           type: number
-        - name: N
+        - name: N[1]
           title: N
           type: integer
+        - name: name[2]
+          type: text
+          title: ''
+        - name: mean[2]
+          type: number
+          title: 'M'
+        - name: CI_low[2]
+          type: number
+          title: Lower
+          superTitle: Confidence Interval
+        - name: CI_high[2]
+          type: number
+          title: Upper
+          superTitle: Confidence Interval
+        - name: s[2]
+          title: s
+          type: number
+        - name: N[2]
+          title: N
+          type: integer
+        - name: name[3]
+          type: text
+          title: ''
+          content: Difference
+        - name: mean[3]
+          type: number
+          title: 'M'
+        - name: CI_low[3]
+          type: number
+          title: Lower
+          superTitle: Confidence Interval
+        - name: CI_high[3]
+          type: number
+          title: Upper
+          superTitle: Confidence Interval
+        - name: s[3]
+          title: s
+          type: number
+          content: ''
+        - name: N[3]
+          title: N
+          type: integer
+          content: ''
+        - name: name[4]
+          type: text
+          title: ''
+          content: Standardized Difference (Cohen's d)
+        - name: mean[4]
+          type: number
+          title: 'M'
+          format: zto
+        - name: CI_low[4]
+          type: number
+          title: Lower
+          superTitle: Confidence Interval
+          format: zto
+        - name: CI_high[4]
+          type: number
+          title: Upper
+          superTitle: Confidence Interval
+          format: zto
+        - name: s[4]
+          title: s
+          type: number
+          content: ''
+        - name: N[4]
+          title: N
+          type: integer
+          content: ''
 
     - name:  text
-      type:  Preformatted
+      type:  Html
           
     - name: plot
       title: Difference Plot
       type: Image
-      width:  400
-      height: 300
+      width:  600
+      height: 400
       renderFun: .plot
+      requiresData: true
   
 
 ...
